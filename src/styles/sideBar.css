@@ -1,0 +1,41 @@
+/* Sidebar.css */
+.layout {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #f7d9a6; /* 浅橙色 */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 10px 0;
+    color: #555;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .sidebar ul li:hover {
+    color: #000;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff; /* 白色背景 */
+  }
+  

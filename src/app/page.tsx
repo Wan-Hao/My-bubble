@@ -1,127 +1,36 @@
-import Image from 'next/image'
+"use client";
 
-// 可复用的按钮组件
-const Button = ({
-  href,
-  children,
-  iconSrc,
-  iconAlt,
-  className,
-}: {
-  href: string
-  children: React.ReactNode
-  iconSrc: string
-  iconAlt: string
-  className: string
-}) => (
-  <a
-    className={`rounded-full border border-solid transition-colors flex items-center justify-center gap-2 px-4 sm:px-5 sm:min-w-44 ${className}`}
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <Image
-      className="dark:invert"
-      src={iconSrc}
-      alt={iconAlt}
-      width={20}
-      height={20}
-    />
-    {children}
-  </a>
-)
+import { useState } from "react";
+import Sidebar from "@/components/sidebar";
+import TodoListComponent from "@/components/todoList";
+import Item from "@/components/item";
+
+const today = new Date();
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("En", { weekday: "long" }).format(date);
+}
 
 export default function Home() {
+  const [todos, setTodos] = useState<{ id: number; text: string }[]>([]);
+
+  const handleAddTodo = () => {
+    const newTodo = { id: Date.now(), text: `New Todo ${todos.length + 1}` };
+    setTodos([...todos, newTodo]);
+  };
+  const handleDelete = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));  // 过滤掉要删除的项
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{' '}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <Button
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            iconSrc="/vercel.svg"
-            iconAlt="Vercel logomark"
-            className="bg-foreground text-background hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12"
-          >
-            Deploy now
-          </Button>
-
-          <Button
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            iconSrc="/window.svg"
-            iconAlt="Window icon"
-            className="border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent"
-          >
-            Read our docs
-          </Button>
-        </div>
-      </main>
-
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div>
+     
+      <Sidebar>
+        <h1>HOME page.</h1>
+        <h1 style={{ fontSize: "24px" }}>To Do List for {formatDate(today)}</h1>
+        <Item type="daily workout" isPacked={true} />
+        <TodoListComponent todos={todos} onAdd={handleAddTodo} onDelete={handleDelete} />
+      </Sidebar>
     </div>
-  )
+  );
 }

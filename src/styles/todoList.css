@@ -1,0 +1,68 @@
+/* TodoListComponent.css */
+.todo-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.todo-item,
+.todo-add {
+  width: 300px;
+  height: 300px;
+  background-color: #7f5f2c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #674903;
+  border-width: 1mm;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.todo-add {
+  background-color: #ecbd78;
+}
+
+.todo-textarea {
+  position: relative;
+  transform: translate(24px, 0px);
+  width: 250px;
+  height: 250px;
+  background-color: #b28f55;
+  color: #fff;
+}
+
+.todo-save,
+.todo-edit {
+  position: relative;
+  transform: translate(3px, 6px);
+  margin-top: 260px;
+  cursor: pointer;
+  background-color: #422302;
+  color: #fff;
+  width: 40px;
+  border-radius: 6px; /* 设置圆角的弧度 */
+  font-size: 16px;
+  border: 2px solid #674903;
+}
+
+.todo-delete {
+  position: relative;
+  transform: translate(233px, -76px);
+  cursor: pointer;
+  background-color: #422302;
+  color: #fff;
+  width: 50px;
+  border-radius: 6px; /* 设置圆角的弧度 */
+  font-size: 16px;
+  border: 2px solid #674903;
+}
+
+.todo-markdown {
+  position: relative;
+  transform: translate(17px, -20px);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #7f5f2c;
+  color: #fff;
+}
